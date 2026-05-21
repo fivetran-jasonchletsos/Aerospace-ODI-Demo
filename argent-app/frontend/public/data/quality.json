@@ -1,0 +1,31 @@
+{
+  "metrics": [
+    { "site_id": "WIC", "escape_rate_ppm": 142, "scar_open": 6, "scar_overdue": 1, "faa_reportable_events_ytd": 0, "as9100_audit_findings": 2 },
+    { "site_id": "EVR", "escape_rate_ppm": 198, "scar_open": 9, "scar_overdue": 3, "faa_reportable_events_ytd": 1, "as9100_audit_findings": 4 },
+    { "site_id": "CHA", "escape_rate_ppm": 167, "scar_open": 5, "scar_overdue": 0, "faa_reportable_events_ytd": 0, "as9100_audit_findings": 1 },
+    { "site_id": "FTW", "escape_rate_ppm": 212, "scar_open": 8, "scar_overdue": 2, "faa_reportable_events_ytd": 0, "as9100_audit_findings": 3 },
+    { "site_id": "HUN", "escape_rate_ppm": 188, "scar_open": 7, "scar_overdue": 2, "faa_reportable_events_ytd": 0, "as9100_audit_findings": 2 },
+    { "site_id": "MEL", "escape_rate_ppm": 134, "scar_open": 4, "scar_overdue": 0, "faa_reportable_events_ytd": 0, "as9100_audit_findings": 1 },
+    { "site_id": "ATL", "escape_rate_ppm":  92, "scar_open": 3, "scar_overdue": 1, "faa_reportable_events_ytd": 0, "as9100_audit_findings": 1 },
+    { "site_id": "DAL", "escape_rate_ppm": 118, "scar_open": 6, "scar_overdue": 2, "faa_reportable_events_ytd": 1, "as9100_audit_findings": 2 },
+    { "site_id": "JAX", "escape_rate_ppm":  88, "scar_open": 2, "scar_overdue": 0, "faa_reportable_events_ytd": 0, "as9100_audit_findings": 1 },
+    { "site_id": "BEL", "escape_rate_ppm": 224, "scar_open": 8, "scar_overdue": 3, "faa_reportable_events_ytd": 0, "as9100_audit_findings": 5 },
+    { "site_id": "QRO", "escape_rate_ppm": 156, "scar_open": 5, "scar_overdue": 1, "faa_reportable_events_ytd": 0, "as9100_audit_findings": 2 },
+    { "site_id": "SIN", "escape_rate_ppm":  79, "scar_open": 2, "scar_overdue": 0, "faa_reportable_events_ytd": 0, "as9100_audit_findings": 0 }
+  ],
+  "site_rollup": {
+    "escape_rate_ppm": 154,
+    "scar_open": 65,
+    "scar_overdue": 15,
+    "faa_events_ytd": 2
+  },
+  "trend": [
+    { "month": "2025-11", "escape_rate_ppm": 218 },
+    { "month": "2025-12", "escape_rate_ppm": 204 },
+    { "month": "2026-01", "escape_rate_ppm": 191 },
+    { "month": "2026-02", "escape_rate_ppm": 178 },
+    { "month": "2026-03", "escape_rate_ppm": 167 },
+    { "month": "2026-04", "escape_rate_ppm": 158 },
+    { "month": "2026-05", "escape_rate_ppm": 154 }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "bays": [
+    { "bay_id": "ATL-B1", "site_id": "ATL", "utilization_pct": 87, "current_wp": "WP-44011" },
+    { "bay_id": "ATL-B2", "site_id": "ATL", "utilization_pct": 92, "current_wp": "WP-44012" },
+    { "bay_id": "ATL-B3", "site_id": "ATL", "utilization_pct": 78, "current_wp": "WP-44013" },
+    { "bay_id": "DAL-B1", "site_id": "DAL", "utilization_pct": 95, "current_wp": "WP-44021" },
+    { "bay_id": "DAL-B2", "site_id": "DAL", "utilization_pct": 88, "current_wp": "WP-44022" },
+    { "bay_id": "DAL-B3", "site_id": "DAL", "utilization_pct": 81, "current_wp": "WP-44023" },
+    { "bay_id": "DAL-B4", "site_id": "DAL", "utilization_pct": 104, "current_wp": "WP-44024" },
+    { "bay_id": "JAX-B1", "site_id": "JAX", "utilization_pct": 84, "current_wp": "WP-44031" },
+    { "bay_id": "JAX-B2", "site_id": "JAX", "utilization_pct": 71, "current_wp": null },
+    { "bay_id": "SIN-B1", "site_id": "SIN", "utilization_pct": 89, "current_wp": "WP-44041" },
+    { "bay_id": "SIN-B2", "site_id": "SIN", "utilization_pct": 76, "current_wp": "WP-44042" }
+  ],
+  "work_packages": [
+    { "wp_id": "WP-44011", "bay_id": "ATL-B1", "site_id": "ATL", "airframe": "Single-aisle narrow-body", "customer": "Global low-cost carrier",        "check_type": "C",        "start_date": "2026-05-11", "est_complete_date": "2026-05-29", "days_elapsed": 10, "days_remaining":  8, "parts_fill_rate_pct": 94, "on_schedule": true  },
+    { "wp_id": "WP-44012", "bay_id": "ATL-B2", "site_id": "ATL", "airframe": "Wide-body twin-aisle",     "customer": "Trans-Pacific flag carrier",     "check_type": "engine",   "start_date": "2026-05-14", "est_complete_date": "2026-05-25", "days_elapsed":  7, "days_remaining":  4, "parts_fill_rate_pct": 91, "on_schedule": true  },
+    { "wp_id": "WP-44013", "bay_id": "ATL-B3", "site_id": "ATL", "airframe": "Regional jet",            "customer": "Regional operator",              "check_type": "A",        "start_date": "2026-05-18", "est_complete_date": "2026-05-24", "days_elapsed":  3, "days_remaining":  3, "parts_fill_rate_pct": 97, "on_schedule": true  },
+    { "wp_id": "WP-44021", "bay_id": "DAL-B1", "site_id": "DAL", "airframe": "Single-aisle narrow-body", "customer": "Major US carrier",               "check_type": "D",        "start_date": "2026-04-22", "est_complete_date": "2026-06-04", "days_elapsed": 29, "days_remaining": 14, "parts_fill_rate_pct": 88, "on_schedule": false },
+    { "wp_id": "WP-44022", "bay_id": "DAL-B2", "site_id": "DAL", "airframe": "Single-aisle narrow-body", "customer": "Cargo operator",                 "check_type": "C",        "start_date": "2026-05-09", "est_complete_date": "2026-05-30", "days_elapsed": 12, "days_remaining":  9, "parts_fill_rate_pct": 92, "on_schedule": true  },
+    { "wp_id": "WP-44023", "bay_id": "DAL-B3", "site_id": "DAL", "airframe": "Wide-body twin-aisle",     "customer": "Major US carrier",               "check_type": "avionics", "start_date": "2026-05-16", "est_complete_date": "2026-05-28", "days_elapsed":  5, "days_remaining":  7, "parts_fill_rate_pct": 95, "on_schedule": true  },
+    { "wp_id": "WP-44024", "bay_id": "DAL-B4", "site_id": "DAL", "airframe": "Single-aisle narrow-body", "customer": "Global low-cost carrier",        "check_type": "C",        "start_date": "2026-05-13", "est_complete_date": "2026-06-08", "days_elapsed":  8, "days_remaining": 18, "parts_fill_rate_pct": 78, "on_schedule": false },
+    { "wp_id": "WP-44031", "bay_id": "JAX-B1", "site_id": "JAX", "airframe": "ISR airframe",            "customer": "Allied MoD",                     "check_type": "D",        "start_date": "2026-05-04", "est_complete_date": "2026-06-12", "days_elapsed": 17, "days_remaining": 22, "parts_fill_rate_pct": 86, "on_schedule": true  },
+    { "wp_id": "WP-44041", "bay_id": "SIN-B1", "site_id": "SIN", "airframe": "Wide-body twin-aisle",     "customer": "Asian flag carrier",             "check_type": "C",        "start_date": "2026-05-10", "est_complete_date": "2026-05-30", "days_elapsed": 11, "days_remaining":  9, "parts_fill_rate_pct": 90, "on_schedule": true  },
+    { "wp_id": "WP-44042", "bay_id": "SIN-B2", "site_id": "SIN", "airframe": "Single-aisle narrow-body", "customer": "SE Asia low-cost carrier",       "check_type": "A",        "start_date": "2026-05-19", "est_complete_date": "2026-05-26", "days_elapsed":  2, "days_remaining":  5, "parts_fill_rate_pct": 96, "on_schedule": true  }
+  ],
+  "due_for_check": [
+    { "tail": "N73AR", "airframe": "Single-aisle narrow-body", "operator": "Major US carrier",        "next_heavy_check": "C-check",  "hours_since_check": 5810, "due_within_days": 12 },
+    { "tail": "N812LC", "airframe": "Single-aisle narrow-body", "operator": "Global low-cost carrier", "next_heavy_check": "C-check",  "hours_since_check": 6020, "due_within_days":  4 },
+    { "tail": "N441WB", "airframe": "Wide-body twin-aisle",     "operator": "Trans-Pacific flag carrier","next_heavy_check": "D-check","hours_since_check": 28100, "due_within_days": 22 },
+    { "tail": "N095CG", "airframe": "Cargo freighter conversion","operator": "Cargo operator",          "next_heavy_check": "engine OH","hours_since_check": 7440, "due_within_days":  9 },
+    { "tail": "G-ARGT", "airframe": "Single-aisle narrow-body", "operator": "European charter",        "next_heavy_check": "C-check",  "hours_since_check": 6210, "due_within_days":  7 },
+    { "tail": "VH-RGN", "airframe": "Wide-body twin-aisle",     "operator": "Oceania carrier",         "next_heavy_check": "C-check",  "hours_since_check": 4900, "due_within_days": 18 },
+    { "tail": "9V-ARS", "airframe": "Single-aisle narrow-body", "operator": "SE Asia low-cost carrier","next_heavy_check": "C-check",  "hours_since_check": 5680, "due_within_days": 14 },
+    { "tail": "N221DM", "airframe": "ISR airframe",            "operator": "Allied MoD",              "next_heavy_check": "Phase depot","hours_since_check": 11200, "due_within_days":  6 },
+    { "tail": "N504MR", "airframe": "Tanker/transport",        "operator": "US DoD service customer", "next_heavy_check": "D-check",  "hours_since_check": 22300, "due_within_days": 27 },
+    { "tail": "N773FX", "airframe": "Single-aisle narrow-body", "operator": "Cargo operator",          "next_heavy_check": "A-check",  "hours_since_check": 1410, "due_within_days":  3 }
+  ],
+  "turnaround_by_airframe": [
+    { "airframe": "Single-aisle narrow-body", "days_avg": 17.8, "trend": [22.1, 21.4, 20.6, 19.7, 18.9, 18.4, 17.8] },
+    { "airframe": "Wide-body twin-aisle",     "days_avg": 24.2, "trend": [27.5, 27.1, 26.6, 25.8, 25.0, 24.6, 24.2] },
+    { "airframe": "Regional jet",             "days_avg": 11.6, "trend": [13.1, 12.7, 12.3, 12.0, 11.9, 11.7, 11.6] },
+    { "airframe": "Cargo freighter",          "days_avg": 19.4, "trend": [21.0, 20.6, 20.2, 19.9, 19.7, 19.5, 19.4] },
+    { "airframe": "ISR airframe",             "days_avg": 31.7, "trend": [34.8, 34.0, 33.2, 32.7, 32.3, 31.9, 31.7] }
+  ]
+}

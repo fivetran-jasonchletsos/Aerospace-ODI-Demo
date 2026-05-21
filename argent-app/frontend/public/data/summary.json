@@ -1,0 +1,19 @@
+{
+  "revenue_ytd_usd": 11420000000,
+  "revenue_ytd_label": "$11.42B",
+  "on_time_delivery_pct": 91.4,
+  "on_time_delivery_delta_bps": -120,
+  "defense_win_rate_pct": 38.2,
+  "defense_win_rate_delta_bps": 240,
+  "mro_turnaround_days": 18.6,
+  "mro_turnaround_delta_days": -1.2,
+  "supplier_scorecard_avg": 82.4,
+  "supplier_scorecard_delta": 0.6,
+  "in_service_fleet": 3412,
+  "sites_count": 14,
+  "programs_active": 47,
+  "iceberg_table_count": 286,
+  "s3_bytes": 64424509440000,
+  "generated_at": "2026-05-21T07:00:00Z",
+  "source": "demo"
+}

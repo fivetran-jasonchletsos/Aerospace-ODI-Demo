@@ -1,0 +1,22 @@
+{
+  "awards": [
+    { "award_id": "DEF-AW-0044", "program": "Coastal Surveillance Radar Block 4", "customer": "US DoD service customer", "status": "down_select",  "ceiling_value_usd": 2800000000, "decision_date": "2026-05-29", "pwin_pct": 48 },
+    { "award_id": "DEF-AW-0048", "program": "Forward Operating Sensor Pod",       "customer": "US DoD service customer", "status": "proposal",     "ceiling_value_usd":  640000000, "decision_date": "2026-06-12", "pwin_pct": 35 },
+    { "award_id": "DEF-AW-0052", "program": "Allied Tanker MRO Lot 3",            "customer": "Allied MoD",              "status": "proposal",     "ceiling_value_usd":  410000000, "decision_date": "2026-06-30", "pwin_pct": 62 },
+    { "award_id": "DEF-AW-0055", "program": "Counter-UAS Effector Phase II",      "customer": "US DoD service customer", "status": "pre_solicit",  "ceiling_value_usd": 1200000000, "decision_date": "2026-09-15", "pwin_pct": 28 },
+    { "award_id": "DEF-AW-0061", "program": "Maritime ISR Capability Block 1",    "customer": "Allied MoD",              "status": "awarded",      "ceiling_value_usd":  920000000, "decision_date": "2026-04-30", "pwin_pct": 100 },
+    { "award_id": "DEF-AW-0063", "program": "Air-Defense Effector Lot 2",         "customer": "US DoD service customer", "status": "down_select",  "ceiling_value_usd":  780000000, "decision_date": "2026-06-05", "pwin_pct": 41 },
+    { "award_id": "DEF-AW-0067", "program": "Tactical Crypto Refresh Phase 1",    "customer": "US DoD service customer", "status": "proposal",     "ceiling_value_usd":  380000000, "decision_date": "2026-07-22", "pwin_pct": 55 }
+  ],
+  "compliance": [
+    { "control": "FAR 52.204-21 — Basic Safeguarding of Covered Contractor Information", "status": "compliant", "note": "Baseline safeguards verified across all CUI-tagged Snowflake schemas and Iceberg partitions." },
+    { "control": "DFARS 252.204-7012 — Safeguarding CDI",                                 "status": "compliant", "note": "NIST SP 800-171 controls implemented. Last assessment 2026-Q1." },
+    { "control": "DFARS 252.204-7019 — NIST SP 800-171 DoD Assessment Requirements",      "status": "compliant", "note": "SPRS score 104 (high). Self-assessment refreshed monthly via the ODI control plane." },
+    { "control": "DFARS 252.204-7020 — Higher-Level NIST SP 800-171 Assessment",          "status": "compliant", "note": "Medium-confidence DoD assessment scheduled 2026-Q4." },
+    { "control": "DFARS 252.204-7021 — CMMC Requirements",                                "status": "compliant", "note": "CMMC Level 2 certified 2026-02-14. Re-cert 2029. Iceberg CUI bucket on segregated AWS GovCloud account." },
+    { "control": "ITAR 22 CFR 120-130 — Export Controls",                                  "status": "compliant", "note": "Defense-program data isolated to US-person access. Citizenship attestations enforced at the catalog layer." },
+    { "control": "DCAA / Costpoint segregation of cost",                                   "status": "compliant", "note": "Deltek Costpoint indirect-rate streams keep classified vs unclassified program accounting separate by default." }
+  ],
+  "cmmc_level": 2,
+  "data_handling_note": "All defense-program data lands in a CUI-tagged Iceberg namespace on a separate AWS GovCloud account. Commercial-OEM data lands in the public-commercial account. The ODI catalog presents one logical surface, but the storage and access boundary follows FAR/DFARS authority."
+}
