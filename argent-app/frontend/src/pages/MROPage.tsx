@@ -25,7 +25,7 @@ export default function MROPage() {
       <PageHeader
         eyebrow="MRO Operations"
         title="11 bays, 4 sites, one turnaround clock"
-        blurb="Bay utilization, parts-fill-rate, work-package status and the in-service fleet due for heavy check in the next 30 days. The MRO planner agent reads gold.fct_mro_workpackage and gold.fct_supplier_risk to flag at-risk inductions before they're scheduled."
+        blurb="Bay utilization, parts-fill-rate, work-package status and the in-service fleet due for heavy check in the next 30 days. The MRO planner agent reads the MRO work-package and supplier-risk gold models to flag at-risk inductions before they're scheduled."
         callout="REV. C · SHEET 05 OF 08"
       />
 

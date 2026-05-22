@@ -39,7 +39,7 @@ export default function SupplyChainPage() {
       <PageHeader
         eyebrow="Supply Chain · CSCO Brief"
         title="200 suppliers. One risk picture."
-        blurb="Supplier risk derived from financial health, geopolitical exposure, single-source status, lead-time variance and tariff exposure. The supplier-risk agent reads gold.fct_supplier_risk on the Iceberg lake and surfaces the top of the stack here."
+        blurb="Supplier risk derived from financial health, geopolitical exposure, single-source status, lead-time variance and tariff exposure. The supplier-risk agent reads the supplier-risk gold model on the Iceberg lake and surfaces the top of the stack here."
         callout="REV. C · SHEET 04 OF 08"
       />
 
@@ -93,7 +93,7 @@ export default function SupplyChainPage() {
             </div>
             <div>
               <div className="eyebrow mb-1">Supplier-Risk Agent</div>
-              <h3 className="font-serif text-lg font-semibold text-[var(--ink-strong)]">Reads gold.fct_supplier_risk on Iceberg directly.</h3>
+              <h3 className="font-serif text-lg font-semibold text-[var(--ink-strong)]">Reads the supplier-risk gold model on Iceberg directly.</h3>
               <p className="mt-2 text-sm text-[var(--ink-muted)] leading-relaxed max-w-3xl">
                 Every overnight cycle, the agent re-scores the 200-supplier panel, flags new entrants
                 in the high or elevated buckets, and writes a daily brief to the COO and CSCO. No

@@ -47,7 +47,7 @@ export default function Layout() {
     <div className="min-h-full flex flex-col bg-[var(--paper)]">
       <div className="spec-rail" />
 
-      <header className="bg-[var(--gunmetal)] text-white sticky top-0 z-30 tech-grid">
+      <header className="bg-[var(--navy)] text-white sticky top-0 z-30 tech-grid scanlines">
         <div className="mx-auto max-w-7xl px-3 sm:px-6 lg:px-8">
           <div className="flex h-16 sm:h-20 items-center justify-between gap-2 sm:gap-6">
             <Link to="/" className="flex items-center gap-3 shrink-0 min-w-0 group">
@@ -162,14 +162,14 @@ export default function Layout() {
         <Outlet />
       </main>
 
-      <footer className="border-t border-[var(--hairline)] bg-[var(--gunmetal-deep)] text-white/80 mt-16">
+      <footer className="border-t border-[var(--hairline-navy)] bg-[var(--navy)] text-white/80 mt-16 scanlines">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 grid grid-cols-1 md:grid-cols-3 gap-8 text-sm">
           <div>
             <div className="flex items-center gap-2 mb-3">
               <div className="h-7 w-7 rounded-sm flex items-center justify-center" style={{ background: 'var(--orange)' }}>
                 <ArgentMark className="h-4 w-4 text-[var(--gunmetal-deep)]" />
               </div>
-              <div className="font-serif font-semibold text-white">Argent Aerospace</div>
+              <div className="font-serif font-semibold text-[var(--silver-bright)]">Argent Aerospace</div>
             </div>
             <p className="leading-relaxed text-white/60">
               Tier-1 aerospace and defense prime. Operations intelligence portal on

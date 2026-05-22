@@ -4,10 +4,11 @@
 /*
  * Argent Aerospace — operations design system.
  *
- * Visual language references aerospace engineering spec sheets:
- * gunmetal on off-white, technical orange accents, deep blue
- * for defense-program callouts. Source Serif headers for spec-doc
- * authority; JetBrains Mono for numerics, part numbers, contract IDs.
+ * Visual language: aerospace engineering spec sheets and
+ * flight-data-recorder instrument panels.
+ * Navy-dominant hull with silver metallic accents, technical
+ * orange for warnings/actions, JetBrains Mono for all numerics
+ * and part numbers.  Source Serif 4 for spec-doc authority.
  *
  * Fivetran brand is intentionally absent from the chrome.
  * ODI lives in the architecture — the operator's portal is Argent's.
@@ -17,20 +18,35 @@
 
 :root {
   /* Surfaces */
-  --paper:         #fafafa;
-  --paper-deep:    #f1f1ef;
+  --paper:         #f8f9fa;
+  --paper-deep:    #eef0f3;
   --card:          #ffffff;
-  --gunmetal:      #2d3748;
-  --gunmetal-deep: #1a202c;
-  --gunmetal-soft: #4a5568;
-  --hairline:      #d8dadc;
-  --hairline-soft: #ebedef;
-  --ink-strong:    #0f1419;
-  --ink:           #1f2937;
-  --ink-muted:     #4b5563;
-  --ink-soft:      #6b7280;
 
-  /* Argent accents */
+  /* Navy hull — primary dark chrome */
+  --navy:          #0f1f3d;
+  --navy-mid:      #1a3057;
+  --navy-soft:     #2a4470;
+  --gunmetal:      #243352;
+  --gunmetal-deep: #0a1628;
+  --gunmetal-soft: #3a5080;
+
+  /* Hairlines — navy-tinted */
+  --hairline:      #c8cdd8;
+  --hairline-soft: #dde1ea;
+  --hairline-navy: #b0baca;
+
+  /* Ink */
+  --ink-strong:    #0a1020;
+  --ink:           #1a2540;
+  --ink-muted:     #4a5570;
+  --ink-soft:      #6b7a90;
+
+  /* Silver metallic accent */
+  --silver-accent:    #b8c4d0;
+  --silver-bright:    #d4dde8;
+  --silver-dim:       #8a9ab0;
+
+  /* Argent orange — action / warning */
   --orange:        #ed8936;
   --orange-bright: #f6ad55;
   --orange-dim:    #b8551c;
@@ -61,16 +77,27 @@
 }
 
 @theme {
+  --color-navy-50:  #f0f3f8;
+  --color-navy-100: #d8e0ed;
+  --color-navy-200: #a8bad4;
+  --color-navy-300: #7090b8;
+  --color-navy-400: #3a5080;
+  --color-navy-500: #243352;
+  --color-navy-600: #1a3057;
+  --color-navy-700: #0f1f3d;
+  --color-navy-800: #0a1628;
+  --color-navy-900: #050d18;
+
   --color-gunmetal-50:  #f4f5f6;
   --color-gunmetal-100: #e3e6e9;
   --color-gunmetal-200: #c1c7ce;
   --color-gunmetal-300: #97a0aa;
   --color-gunmetal-400: #6b7783;
-  --color-gunmetal-500: #4a5568;
-  --color-gunmetal-600: #2d3748;
-  --color-gunmetal-700: #1f2937;
-  --color-gunmetal-800: #111827;
-  --color-gunmetal-900: #0a0f1a;
+  --color-gunmetal-500: #3a5080;
+  --color-gunmetal-600: #243352;
+  --color-gunmetal-700: #1a3057;
+  --color-gunmetal-800: #0f1f3d;
+  --color-gunmetal-900: #0a1628;
 
   --color-orange-50:  #fff7ed;
   --color-orange-100: #fed7aa;
@@ -97,32 +124,69 @@ html, body {
 
 h1, h2, h3, .font-serif {
   font-family: "Source Serif 4", "Source Serif Pro", Georgia, "Times New Roman", serif;
-  letter-spacing: -0.012em;
+  letter-spacing: -0.02em;
 }
 h1 { color: var(--ink-strong); }
 
+/*
+ * Dual-line engineering border:
+ * thin orange signal line above, thin silver rule below.
+ * Reads as a nav/instrument boundary in aerospace MFD panels.
+ */
 .spec-rail {
-  height: 2px;
-  background: linear-gradient(90deg, var(--orange-dim) 0%, var(--orange) 50%, var(--orange-dim) 100%);
+  height: 0;
+  border-top: 2px solid var(--orange-dim);
+  box-shadow: 0 2px 0 0 var(--silver-accent);
+  margin-bottom: 2px;
 }
 
 .callout-rail {
   height: 1px;
-  background: var(--hairline);
+  background: var(--hairline-navy);
 }
 
-/* Engineering spec-sheet card */
+/*
+ * Scanline overlay — applied to hero and dark banner sections.
+ * Mimics CRT phosphor-grid / avionics display surface.
+ * Uses a repeating linear-gradient at 2px pitch; opacity low enough
+ * to be subliminal, visible enough to read as intentional texture.
+ */
+.scanlines {
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      rgba(10, 22, 40, 0.08) 0px,
+      rgba(10, 22, 40, 0.08) 1px,
+      transparent 1px,
+      transparent 2px
+    );
+}
+
+/* Engineering dot-grid — used on hero behind hero content */
+.tech-grid {
+  background-image:
+    radial-gradient(circle, rgba(180, 196, 208, 0.18) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/*
+ * Engineering spec-sheet card.
+ * Navy-tinted 1px border so cards don't float on white; subtle
+ * inner shadow to simulate panel inset.
+ */
 .spec-card {
   background: var(--card);
-  border: 1px solid var(--hairline);
-  border-radius: 0.25rem;
-  box-shadow: 0 1px 2px rgba(45, 55, 72, 0.04);
+  border: 1px solid var(--hairline-navy);
+  border-radius: 0.1875rem;
+  box-shadow:
+    0 1px 2px rgba(10, 22, 40, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.85);
   position: relative;
 }
 .spec-card-header {
   padding: 0.75rem 1rem;
   border-bottom: 1px solid var(--hairline-soft);
-  background: linear-gradient(180deg, #ffffff 0%, #fafafa 100%);
+  background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -153,7 +217,7 @@ h1 { color: var(--ink-strong); }
 .pill.green    { background: var(--green-bg);   color: var(--green);    border-color: #a7f3d0; }
 .pill.red      { background: var(--red-bg);     color: var(--red);      border-color: #fecaca; }
 .pill.amber    { background: var(--amber-bg);   color: var(--amber);    border-color: #fde68a; }
-.pill.neutral  { background: var(--paper-deep); color: var(--ink-muted); border-color: var(--hairline); }
+.pill.neutral  { background: var(--paper-deep); color: var(--ink-muted); border-color: var(--hairline-navy); }
 .pill.orange   { background: var(--orange-bg);  color: var(--orange-dim); border-color: #fed7aa; }
 .pill.defense  { background: var(--defense-bg); color: var(--defense);  border-color: #c7d2fe; }
 
@@ -163,7 +227,7 @@ h1 { color: var(--ink-strong); }
   align-items: center;
   gap: 0.375rem;
   padding: 0.1875rem 0.625rem;
-  border-radius: 0.25rem;
+  border-radius: 0.1875rem;
   font-size: 0.625rem;
   font-weight: 800;
   text-transform: uppercase;
@@ -205,7 +269,7 @@ h1 { color: var(--ink-strong); }
   display: inline-block;
   width: 0.625rem;
   height: 0.5rem;
-  border-color: var(--hairline);
+  border-color: var(--hairline-navy);
 }
 .dim-callout::before { border-left: 1px solid; border-top: 1px solid; border-bottom: 1px solid; }
 .dim-callout::after  { border-right: 1px solid; border-top: 1px solid; border-bottom: 1px solid; }
@@ -219,28 +283,61 @@ h1 { color: var(--ink-strong); }
   letter-spacing: 0.02em;
 }
 
-/* Subtle technical grid backdrop used on hero / banners */
-.tech-grid {
-  background-image:
-    linear-gradient(rgba(250, 250, 250, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(250, 250, 250, 0.04) 1px, transparent 1px);
-  background-size: 48px 48px;
+/*
+ * Instrument-panel corner bracket motif.
+ * Applied to PageHeader to evoke an avionics annotation frame.
+ * Four CSS-generated corner ticks using a single pseudo-element
+ * with box-shadow instead of four separate divs.
+ */
+.panel-bracket {
+  position: relative;
+}
+.panel-bracket::before,
+.panel-bracket::after {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-color: var(--silver-accent);
+  border-style: solid;
+  opacity: 0.7;
+}
+.panel-bracket::before {
+  top: 6px;
+  left: 6px;
+  border-width: 1px 0 0 1px;
+}
+.panel-bracket::after {
+  bottom: 6px;
+  right: 6px;
+  border-width: 0 1px 1px 0;
 }
 
 .leaflet-container {
   height: 100%;
   width: 100%;
   z-index: 0;
-  border-radius: 0.25rem;
+  border-radius: 0.1875rem;
 }
 
 ::-webkit-scrollbar { width: 8px; height: 8px; }
 ::-webkit-scrollbar-track { background: var(--paper-deep); }
-::-webkit-scrollbar-thumb { background: #c4c8cc; border-radius: 4px; }
-::-webkit-scrollbar-thumb:hover { background: #94989c; }
+::-webkit-scrollbar-thumb { background: var(--silver-accent); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--silver-dim); }
 
 *:focus-visible {
   outline: 2px solid var(--orange);
   outline-offset: 2px;
   border-radius: 3px;
+}
+
+/* Hover lift on spec-cards that are clickable/linked */
+a.spec-card:hover,
+button.spec-card:hover {
+  border-color: var(--navy-soft);
+  transform: translateY(-1px);
+  box-shadow:
+    0 3px 8px rgba(10, 22, 40, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.85);
+  transition: transform 120ms ease, box-shadow 120ms ease, border-color 120ms ease;
 }

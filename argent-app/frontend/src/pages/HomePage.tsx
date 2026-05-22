@@ -18,7 +18,7 @@ export default function HomePage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-[var(--gunmetal)] text-white relative overflow-hidden tech-grid">
+      <section className="bg-[var(--navy)] text-white relative overflow-hidden tech-grid scanlines">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 sm:py-20 relative">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-end">
             <div className="lg:col-span-7">
@@ -81,8 +81,7 @@ export default function HomePage() {
             </h2>
             <p className="text-sm text-[var(--ink-muted)] mt-1 max-w-3xl">
               Revenue, on-time delivery to OEM lines, defense bid-win rate, MRO turnaround, supplier
-              scorecard, in-service fleet supported. Sourced from{' '}
-              <span className="layer-chip gold ml-0.5">gold.fct_*</span> on Iceberg.
+              scorecard, in-service fleet supported. Sourced from the gold layer on Iceberg.
             </p>
           </div>
         </div>
@@ -114,10 +113,7 @@ export default function HomePage() {
           <div className="eyebrow mb-1">Top Operating Issues — Next 7 Days</div>
           <h2 className="font-serif text-2xl font-semibold text-[var(--ink-strong)]">What needs the COO and CSCO this week</h2>
           <p className="text-sm text-[var(--ink-muted)] mt-1 max-w-3xl">
-            Surfaced by an agent reading{' '}
-            <span className="layer-chip gold">gold.fct_supplier_risk</span>{' '}
-            <span className="layer-chip gold">gold.fct_mro_workpackage</span>{' '}
-            <span className="layer-chip gold">gold.fct_defense_program_health</span>
+            Surfaced by an agent reading the supplier-risk, MRO work-package, and defense-program-health gold models on the Iceberg lake.
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -167,7 +163,7 @@ export default function HomePage() {
       </section>
 
       {/* Closing principle */}
-      <section className="bg-[var(--gunmetal-deep)] text-white border-t border-[var(--hairline)]">
+      <section className="bg-[var(--navy)] text-white border-t border-[var(--hairline-navy)] scanlines">
         <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8 text-center">
           <div className="eyebrow-light mb-3">Design Principles</div>
           <p className="font-serif text-2xl sm:text-3xl text-white leading-snug">

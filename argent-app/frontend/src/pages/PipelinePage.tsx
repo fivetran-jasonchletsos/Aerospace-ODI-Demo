@@ -77,6 +77,7 @@ export default function PipelinePage() {
             <thead className="bg-[var(--paper-deep)] text-[var(--ink-soft)] text-[11px] uppercase tracking-wider">
               <tr>
                 <th className="text-left px-4 py-2">Source</th>
+                <th className="text-left px-4 py-2">Connector ID</th>
                 <th className="text-left px-4 py-2">Handling</th>
                 <th className="text-left px-4 py-2">Destination</th>
                 <th className="text-right px-4 py-2">Rows / 24h</th>
@@ -89,9 +90,27 @@ export default function PipelinePage() {
               {connectors.map((c) => {
                 const failed = failSim === c.source;
                 const status = failed ? 'failed' : c.status;
+                const fivetranUrl = `https://fivetran.com/dashboard/connectors/${c.fivetran_id}`;
                 return (
                   <tr key={c.source} className="hover:bg-[var(--paper-deep)]/40">
                     <td className="px-4 py-2 mono text-[var(--ink-strong)]">{c.source}</td>
+                    <td className="px-4 py-2">
+                      <div className="flex items-center gap-2">
+                        <span className="mono text-[11px] text-[var(--ink-soft)]">{c.fivetran_id}</span>
+                        <a
+                          href={fivetranUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1 text-[10px] font-semibold text-[var(--defense)] hover:text-[var(--defense-soft)] border border-[var(--defense)]/30 hover:border-[var(--defense-soft)] rounded-sm px-1.5 py-0.5 transition-colors whitespace-nowrap"
+                          title={`Open connector ${c.fivetran_id} in Fivetran`}
+                        >
+                          Open in Fivetran
+                          <svg viewBox="0 0 12 12" className="h-2.5 w-2.5" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                            <path d="M2 10L10 2M5 2h5v5" />
+                          </svg>
+                        </a>
+                      </div>
+                    </td>
                     <td className="px-4 py-2"><span className={`pill ${c.data_handling === 'cui' ? 'defense' : 'neutral'}`}>{c.data_handling.toUpperCase()}</span></td>
                     <td className="px-4 py-2 text-[var(--ink-muted)]">{c.destination}</td>
                     <td className="px-4 py-2 text-right tabular">{fmtNum(c.rows_24h)}</td>

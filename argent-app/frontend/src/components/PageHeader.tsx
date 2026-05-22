@@ -7,8 +7,8 @@ interface PageHeaderProps {
 
 export default function PageHeader({ eyebrow, title, blurb, callout }: PageHeaderProps) {
   return (
-    <header className="border-b border-[var(--hairline)] bg-white">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
+    <header className="border-b border-[var(--hairline-navy)] bg-white">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 sm:py-10 panel-bracket">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
           <div className="max-w-3xl">
             <div className="eyebrow mb-2">{eyebrow}</div>

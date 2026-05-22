@@ -168,6 +168,7 @@ export interface PipelineLayerStats {
 
 export interface PipelineConnector {
   source: string;
+  fivetran_id: string;
   rows_24h: number;
   last_sync: string;
   status: 'ok' | 'sync' | 'failed';
