@@ -9,6 +9,8 @@ import SupplyChainPage from './pages/SupplyChainPage';
 import MROPage from './pages/MROPage';
 import ProgramsPage from './pages/ProgramsPage';
 import PolicyPage from './pages/PolicyPage';
+import RelatedPage from './pages/RelatedPage';
+import PartDetailPage from './pages/PartDetailPage';
 import NotFoundPage from './pages/NotFoundPage';
 
 const queryClient = new QueryClient({
@@ -30,6 +32,8 @@ export default function App() {
             <Route path="/architecture" element={<ArchitecturePage />} />
             <Route path="/pipeline" element={<PipelinePage />} />
             <Route path="/policy" element={<PolicyPage />} />
+            <Route path="/related" element={<RelatedPage />} />
+            <Route path="/parts/:partNo" element={<PartDetailPage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Route>

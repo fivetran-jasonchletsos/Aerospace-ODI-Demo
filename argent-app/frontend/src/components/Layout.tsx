@@ -7,6 +7,7 @@ const NAV_ITEMS: [string, string][] = [
   ['/programs', 'Programs'],
   ['/mro', 'MRO'],
   ['/supply-chain', 'Supply Chain'],
+  ['/related', 'Parts Network'],
   ['/architecture', 'ODI Architecture'],
   ['/pipeline', 'Pipeline'],
   ['/policy', 'Policy Brief'],

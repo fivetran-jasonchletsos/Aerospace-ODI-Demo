@@ -1,7 +1,10 @@
 import { useEffect, useMemo, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { api, fmtUSD, fmtNum, fmtPct } from '../api/queries';
 import type { Supplier, ShortageAlert } from '../types';
 import PageHeader from '../components/PageHeader';
+import { partByNo } from '../data/parts-catalog';
+import { relatedFor } from '../lib/related';
 
 type CountrySpend = { country: string; usd: number };
 
@@ -62,21 +65,7 @@ export default function SupplyChainPage() {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           {shortages.map((s) => (
-            <div key={s.part_no} className="spec-card p-5">
-              <div className="flex items-center justify-between mb-2">
-                <span className="partno text-sm text-[var(--ink-strong)]">{s.part_no}</span>
-                <span className={`pill ${s.weeks_of_supply < 2 ? 'red' : s.weeks_of_supply < 4 ? 'amber' : 'green'}`}>
-                  {s.weeks_of_supply.toFixed(1)} weeks
-                </span>
-              </div>
-              <div className="font-serif text-base font-semibold text-[var(--ink-strong)]">{s.description}</div>
-              <p className="mt-2 text-sm text-[var(--ink-muted)] leading-relaxed">{s.root_cause}</p>
-              <div className="mt-3 flex flex-wrap gap-1.5">
-                {s.affected_programs.map((p) => (
-                  <span key={p} className="mono text-[10px] px-1.5 py-0.5 rounded-sm border border-[var(--hairline)] text-[var(--ink-muted)]">{p}</span>
-                ))}
-              </div>
-            </div>
+            <ShortageCard key={s.part_no} shortage={s} />
           ))}
         </div>
       </section>
@@ -177,6 +166,68 @@ export default function SupplyChainPage() {
         </div>
       </section>
     </>
+  );
+}
+
+function ShortageCard({ shortage: s }: { shortage: ShortageAlert }) {
+  const catalogPart = partByNo(s.part_no);
+  const neighbors = catalogPart ? relatedFor(s.part_no).slice(0, 4) : [];
+
+  return (
+    <div className="spec-card p-5">
+      <div className="flex items-center justify-between mb-2">
+        <span className="partno text-sm text-[var(--ink-strong)]">{s.part_no}</span>
+        <span className={`pill ${s.weeks_of_supply < 2 ? 'red' : s.weeks_of_supply < 4 ? 'amber' : 'green'}`}>
+          {s.weeks_of_supply.toFixed(1)} weeks
+        </span>
+      </div>
+      <div className="font-serif text-base font-semibold text-[var(--ink-strong)]">{s.description}</div>
+      <p className="mt-2 text-sm text-[var(--ink-muted)] leading-relaxed">{s.root_cause}</p>
+      <div className="mt-3 flex flex-wrap gap-1.5">
+        {s.affected_programs.map((p) => (
+          <span key={p} className="mono text-[10px] px-1.5 py-0.5 rounded-sm border border-[var(--hairline)] text-[var(--ink-muted)]">{p}</span>
+        ))}
+      </div>
+
+      {neighbors.length > 0 && (
+        <div className="mt-4 border-t border-[var(--hairline-soft)] pt-3">
+          <div className="eyebrow mb-2 text-[10px]">Related parts — substitution and failure-mode neighbors</div>
+          <ul className="space-y-1">
+            {neighbors.map((nb) => (
+              <li key={nb.part_no} className="flex items-start gap-2">
+                <Link
+                  to={`/parts/${encodeURIComponent(nb.part_no)}`}
+                  className="flex-1 min-w-0 text-left px-2 py-1.5 border-l-2 border-[var(--hairline-navy)] hover:border-[var(--orange)] hover:bg-[var(--orange-bg)] transition-colors block"
+                >
+                  <div className="flex justify-between items-baseline gap-2">
+                    <span className="text-sm text-[var(--ink-strong)] truncate leading-tight">{nb.part.description}</span>
+                    <span className="mono text-[9px] text-[var(--orange-dim)] flex-none">{Math.round(nb.score * 100)}%</span>
+                  </div>
+                  <div className="mono text-[9px] text-[var(--ink-soft)] truncate mt-0.5">{nb.part_no} · {nb.why}</div>
+                  {nb.sharedFailureModes.length > 0 && (
+                    <div className="mt-1 flex flex-wrap gap-1">
+                      {nb.sharedFailureModes.map((fm) => (
+                        <span key={fm} className="mono text-[8px] px-1 py-0.5 bg-[var(--red-bg)] border border-[var(--red)]/20 text-[var(--red)] rounded-sm">
+                          {fm.replace(/_/g, " ")}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </Link>
+              </li>
+            ))}
+          </ul>
+          {catalogPart && (
+            <Link
+              to={`/parts/${encodeURIComponent(s.part_no)}`}
+              className="mt-2 inline-block mono text-[9px] uppercase tracking-[0.2em] text-[var(--orange-dim)] border border-[var(--orange)]/40 px-2 py-1 hover:bg-[var(--orange-bg)] transition-colors"
+            >
+              Full part detail
+            </Link>
+          )}
+        </div>
+      )}
+    </div>
   );
 }
 
