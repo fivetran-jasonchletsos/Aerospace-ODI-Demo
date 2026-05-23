@@ -1,0 +1,104 @@
+{
+  "materialized_model": "gold.fct_removal_by_part_route_corridor_60d",
+  "row_count": 312,
+  "tests_passed": 8,
+  "tests_written": "6 column-level + 1 combination + 1 not-null on removal_rate_per_1000_cycles",
+  "build_seconds": 90,
+  "before": {
+    "nodes": [
+      { "id": "fct_removal_event",  "name": "gold.fct_removal_event",  "layer": "gold" },
+      { "id": "fct_route_exposure", "name": "gold.fct_route_exposure", "layer": "gold" },
+      { "id": "dim_part",           "name": "gold.dim_part",           "layer": "gold" },
+      { "id": "fct_quality_event",  "name": "gold.fct_quality_event",  "layer": "gold" },
+      { "id": "gap", "name": "gold.fct_removal_by_part_route_corridor_60d", "layer": "gap", "built": false }
+    ],
+    "edges": [
+      { "from": "fct_removal_event",  "to": "gap" },
+      { "from": "fct_route_exposure", "to": "gap" },
+      { "from": "dim_part",           "to": "gap" },
+      { "from": "fct_quality_event",  "to": "gap" }
+    ]
+  },
+  "after": {
+    "nodes": [
+      { "id": "fct_removal_event",  "name": "gold.fct_removal_event",  "layer": "gold" },
+      { "id": "fct_route_exposure", "name": "gold.fct_route_exposure", "layer": "gold" },
+      { "id": "dim_part",           "name": "gold.dim_part",           "layer": "gold" },
+      { "id": "fct_quality_event",  "name": "gold.fct_quality_event",  "layer": "gold" },
+      { "id": "new_gold", "name": "gold.fct_removal_by_part_route_corridor_60d", "layer": "gold", "built": true, "new": true },
+      { "id": "airworthiness_dash", "name": "Airworthiness Dashboard",  "layer": "consumer" },
+      { "id": "camo_feed",          "name": "CAMO Reporting Feed",      "layer": "consumer" }
+    ],
+    "edges": [
+      { "from": "fct_removal_event",  "to": "new_gold" },
+      { "from": "fct_route_exposure", "to": "new_gold" },
+      { "from": "dim_part",           "to": "new_gold" },
+      { "from": "fct_quality_event",  "to": "new_gold" },
+      { "from": "new_gold", "to": "airworthiness_dash" },
+      { "from": "new_gold", "to": "camo_feed" }
+    ]
+  },
+  "root_cause": {
+    "headline": "Pacific routes share a salt-air corrosion pattern the Atlantic fleet's coastal stops don't see — the December gasket vendor switch correlates 91% with elevated removals",
+    "detail": "Of 38 Pacific-fleet servo removals in the 60-day window, 35 share a single signature: the gasket vendor changed in December from a fluorocarbon compound to a nitrile compound (vendor code GKT-N41) that degrades 3.2x faster in sustained salt-air exposure above 400 cycles/month. Atlantic routes average 180 cycles/month through similar coastal altitudes; Pacific routes average 490. The fix is a gasket revert to the fluorocarbon compound — not a servo recall.",
+    "affected_cohort": "Pacific-corridor tails with gasket vendor GKT-N41 post December change and cycles greater than 400/month",
+    "fallout_count": 35,
+    "total_reviewed": 38
+  },
+  "without_wizard": {
+    "label": "Without dbt-wizard",
+    "summary": "Question enters the analytics backlog. Airworthiness review meets without the answer.",
+    "metrics": [
+      { "label": "Time to model",                "value": "3 to 5 days" },
+      { "label": "Engineer hours",               "value": "8 to 14h" },
+      { "label": "Tests written",                "value": "ad-hoc" },
+      { "label": "Lineage entries",              "value": "manual" },
+      { "label": "Documentation",               "value": "PR-time only" },
+      { "label": "Airworthiness review status", "value": "no answer" }
+    ],
+    "narrative": [
+      "CRO files the request. It enters the analytics backlog.",
+      "Data engineer scopes the work — days after the review window.",
+      "Engineer writes SQL from scratch across four gold marts by hand.",
+      "Tests, YAML, and contract get bolted on at PR time.",
+      "Reliability team cannot isolate root cause before the airworthiness review.",
+      "Fleet grounding exposure and AOG costs continue to accrue."
+    ]
+  },
+  "with_wizard": {
+    "label": "With dbt-wizard",
+    "summary": "Four sub-agents surface the upstreams, author the SQL, write the tests, and materialize the asset in 90 seconds.",
+    "metrics": [
+      { "label": "Time to model",                "value": "90 seconds" },
+      { "label": "Engineer hours",               "value": "0.0h authored" },
+      { "label": "Tests written",                "value": "6 column + 1 combination + 1 not-null" },
+      { "label": "Lineage entries",              "value": "auto, 4 upstream" },
+      { "label": "Documentation",               "value": "in YAML on materialize" },
+      { "label": "Airworthiness review status", "value": "root cause in hand" }
+    ],
+    "narrative": [
+      "Explorer runs status and search. Returns the four gold upstream candidates.",
+      "Summary runs describe and lineage. Confirms join path and names the new grain.",
+      "Worker runs dbt_show on a 60-day slice. Validates the proposed grain.",
+      "Worker authors fct_removal_by_part_route_corridor_60d.sql with CTEs and final SELECT.",
+      "Verification writes the YAML — description, schema contract, 8 tests, ownership.",
+      "Worker materializes the table to Iceberg. Verification confirms downstream lineage.",
+      "CRO presents gasket-revert finding to Airworthiness Review 12 hours ahead of schedule."
+    ]
+  },
+  "governance": [
+    { "label": "Tests written",            "value": "6 column-level + 1 combination + 1 not-null" },
+    { "label": "Schema contract",          "value": "enforced on materialize" },
+    { "label": "Lineage upstreams",        "value": "4 declared, 4 validated" },
+    { "label": "Documentation",            "value": "auto-written in YAML" },
+    { "label": "Ownership",               "value": "reliability_analytics" },
+    { "label": "Tag",                      "value": "ai_built · removal_rate · airworthiness" },
+    { "label": "Iceberg table format",     "value": "v2 · Parquet · ZSTD" },
+    { "label": "Open Catalog registration","value": "complete" }
+  ],
+  "hero": {
+    "label": "Root cause identified 12 hours before the Airworthiness Review — gasket revert, not a servo recall",
+    "value": "90 seconds",
+    "note": "From CRO question to materialized Iceberg gold table — versioned, tested, documented, lineage-tracked. The reliability team now knows Pacific salt-air exposure combined with the December gasket vendor switch is the driver. The fix is a gasket revert to the fluorocarbon compound. $11M in AOG and fleet-grounding exposure is resolved without a full servo recall."
+  }
+}

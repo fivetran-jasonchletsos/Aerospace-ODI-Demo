@@ -12,6 +12,9 @@ import PolicyPage from './pages/PolicyPage';
 import RelatedPage from './pages/RelatedPage';
 import PartDetailPage from './pages/PartDetailPage';
 import NotFoundPage from './pages/NotFoundPage';
+import WizardScenarioPage from './pages/WizardScenarioPage';
+import WizardLivePage from './pages/WizardLivePage';
+import WizardOutcomePage from './pages/WizardOutcomePage';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -35,6 +38,9 @@ export default function App() {
             <Route path="/related" element={<RelatedPage />} />
             <Route path="/parts/:partNo" element={<PartDetailPage />} />
             <Route path="/about" element={<AboutPage />} />
+            <Route path="/dbt-wizard" element={<WizardScenarioPage />} />
+            <Route path="/wizard-live" element={<WizardLivePage />} />
+            <Route path="/wizard-outcome" element={<WizardOutcomePage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Route>
         </Routes>

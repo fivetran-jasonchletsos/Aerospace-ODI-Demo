@@ -10,6 +10,7 @@ const NAV_ITEMS: [string, string][] = [
   ['/related', 'Parts Network'],
   ['/architecture', 'ODI Architecture'],
   ['/pipeline', 'Pipeline'],
+  ['/dbt-wizard', 'dbt-wizard'],
   ['/policy', 'Policy Brief'],
   ['/about', 'About'],
 ];
@@ -196,8 +197,17 @@ export default function Layout() {
           </div>
         </div>
         <div className="border-t border-white/10">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-3 text-[11px] text-white/50 flex flex-col sm:flex-row gap-1 sm:items-center sm:justify-between">
-            <div>© 2026 Argent Aerospace ODI Demo. Fivetran Open Data Infrastructure.</div>
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-3 text-[11px] text-white/50 flex flex-col sm:flex-row gap-2 sm:items-center sm:justify-between">
+            <div className="flex flex-wrap items-center gap-3">
+              <span>© 2026 Argent Aerospace ODI Demo. Fivetran Open Data Infrastructure.</span>
+              <a
+                href="#/dbt-wizard"
+                className="inline-flex items-center gap-1.5 rounded-sm px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider border transition-colors"
+                style={{ background: 'rgba(237,137,54,0.12)', color: 'var(--orange-bright)', borderColor: 'rgba(237,137,54,0.35)' }}
+              >
+                dbt-wizard · $11M AOG scenario
+              </a>
+            </div>
             <div>Snapshot {snapshotAt ? new Date(snapshotAt).toLocaleString() : '—'}</div>
           </div>
         </div>

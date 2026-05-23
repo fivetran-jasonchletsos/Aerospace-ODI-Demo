@@ -173,6 +173,38 @@ export default function PipelinePage() {
           </p>
         </div>
       </section>
+
+      {/* dbt-wizard callout */}
+      <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+        <div
+          className="spec-card p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5"
+          style={{ borderLeft: '4px solid var(--orange)' }}
+        >
+          <div>
+            <div className="eyebrow mb-1">dbt-wizard · On-demand model authoring</div>
+            <h2 className="font-serif text-xl font-semibold text-[var(--ink-strong)] mt-0.5">
+              Missing gold models authored on demand — same Snowflake account
+            </h2>
+            <p className="text-sm text-[var(--ink-muted)] mt-1 max-w-2xl">
+              When a reliability question has no gold model to answer it, dbt-wizard's four sub-agents
+              author, test, and materialize one in under two minutes. Live demo: Chief Reliability Officer
+              asks why the Pacific fleet servo removal rate is 2.4x Atlantic — $11M AOG exposure, Airworthiness
+              Review in 12 hours. No gold.fct_removal_by_part_route_corridor_60d exists. dbt-wizard builds it
+              in 90 seconds.
+            </p>
+          </div>
+          <a
+            href="#/dbt-wizard"
+            className="inline-flex items-center gap-2 rounded-sm font-semibold text-[var(--gunmetal-deep)] px-5 py-3 whitespace-nowrap hover:opacity-95 transition-opacity shrink-0"
+            style={{ background: 'var(--orange)' }}
+          >
+            Run the scenario
+            <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+              <path d="M5 12h14M13 5l7 7-7 7" />
+            </svg>
+          </a>
+        </div>
+      </section>
     </>
   );
 }

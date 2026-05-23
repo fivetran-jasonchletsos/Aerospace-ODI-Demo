@@ -341,3 +341,37 @@ button.spec-card:hover {
     inset 0 1px 0 rgba(255, 255, 255, 0.85);
   transition: transform 120ms ease, box-shadow 120ms ease, border-color 120ms ease;
 }
+
+/*
+ * dbt-wizard shared primitives
+ * argent-card — the wizard equivalent of spec-card, used inside the terminal
+ * status-pill  — inline status badge for the live-build control bar
+ */
+.argent-card {
+  background: var(--card);
+  border: 1px solid var(--hairline);
+  border-radius: 0.25rem;
+  box-shadow: 0 1px 3px rgba(10, 22, 40, 0.06);
+}
+.argent-card-header {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--hairline-soft);
+  background: var(--paper-deep);
+}
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.125rem 0.625rem;
+  border-radius: 9999px;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border: 1px solid transparent;
+  font-family: "Inter", sans-serif;
+}
+.status-pill.healthy { background: var(--green-bg);   color: var(--green);   border-color: #a7f3d0; }
+.status-pill.caution { background: var(--amber-bg);   color: var(--amber);   border-color: #fde68a; }
+.status-pill.alert   { background: var(--red-bg);     color: var(--red);     border-color: #fecaca; }

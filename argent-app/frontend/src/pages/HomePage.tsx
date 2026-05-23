@@ -42,10 +42,16 @@ export default function HomePage() {
                   Open the operating picture <span aria-hidden>→</span>
                 </button>
                 <button
-                  onClick={() => navigate('/architecture')}
+                  onClick={() => navigate('/dbt-wizard')}
                   className="inline-flex items-center gap-2 rounded-sm font-semibold text-sm text-white bg-white/5 border border-white/20 px-5 py-3 hover:bg-white/10 transition-colors"
                 >
-                  See the ODI architecture <span aria-hidden>→</span>
+                  dbt-wizard: $11M AOG scenario <span aria-hidden>→</span>
+                </button>
+                <button
+                  onClick={() => navigate('/architecture')}
+                  className="inline-flex items-center gap-2 rounded-sm font-semibold text-sm text-white/70 bg-transparent border border-white/10 px-5 py-3 hover:bg-white/5 transition-colors"
+                >
+                  ODI architecture <span aria-hidden>→</span>
                 </button>
               </div>
               <div className="mt-8 mono text-[11px] text-white/55 tracking-wider">

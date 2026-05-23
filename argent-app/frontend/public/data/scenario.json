@@ -1,0 +1,46 @@
+{
+  "company": "Argent Aerospace",
+  "request_id": "BLD-2026-05-23-0019",
+  "requested_by": "Marcus Holt, Chief Reliability Officer",
+  "requested_at": "2026-05-23T06:45:00-07:00",
+  "timezone_label": "Friday 06:45 PDT",
+  "question": "Why did the new flight-control servo show a 2.4x higher in-service removal rate on the Pacific fleet vs Atlantic in the last 60 days?",
+  "metric_label": "In-service removal rate by part, route corridor, 60-day window",
+  "metric_code": "gold.fct_removal_by_part_route_corridor_60d",
+  "sop_meeting_at": "2026-05-24T04:45:00-07:00",
+  "sop_meeting_label": "Saturday 04:45 PDT · Airworthiness Review",
+  "target_schema": "gold",
+  "target_model": "fct_removal_by_part_route_corridor_60d",
+  "target_grain": "one row per (part_number, route_corridor, removal_date)",
+  "prior_crisis_id": "INC-2026-05-18-0044",
+  "hospital_system": "Argent Aerospace Fleet Operations",
+  "service_line": "Pacific Fleet · F-Series Servo",
+  "upstream_models": [
+    {
+      "model": "gold.fct_removal_event",
+      "layer": "gold",
+      "grain": "removal_event_id",
+      "description": "In-service removal events from Maximo MRO. Includes part_number, tail_number, removal_date, removal_code, and fleet_corridor."
+    },
+    {
+      "model": "gold.fct_route_exposure",
+      "layer": "gold",
+      "grain": "tail_number · flight_date",
+      "description": "Route corridor exposure per tail per day from Teamcenter. Includes route_corridor (Pacific vs Atlantic), salt_air_exposure_index, and cycles."
+    },
+    {
+      "model": "gold.dim_part",
+      "layer": "gold",
+      "grain": "part_number (SCD-2)",
+      "description": "Part master with supplier, material spec, and vendor-change history. Includes vendor_effective_date and gasket_vendor_code — key for the December supplier switch."
+    },
+    {
+      "model": "gold.fct_quality_event",
+      "layer": "gold",
+      "grain": "quality_event_id",
+      "description": "AS9100 quality events and shop findings from Apriso MES. Links removal events to inspection findings and failure mode classifications."
+    }
+  ],
+  "manual_time_days": "3 to 5 days",
+  "build_room_seconds": 90
+}
