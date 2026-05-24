@@ -117,11 +117,11 @@ const PILLARS = [
 ];
 
 const STACK = [
-  { layer: 'Ingest',     name: 'Fivetran connectors',         note: 'SAP S/4HANA, Teamcenter, Apriso, Maximo, Costpoint, Ariba, OEM portals.' },
-  { layer: 'Storage',    name: 'Snowflake + Iceberg on S3',   note: 'Snowflake-managed Iceberg for the hot path; raw Iceberg for openness.' },
+  { layer: 'Ingest',     name: 'Fivetran connectors',         note: 'SAP S/4HANA, Teamcenter, Apriso, Maximo, Costpoint, Ariba, OEM portals. Every CDC row landed into Iceberg (MDLS).' },
+  { layer: 'Storage',    name: 'Iceberg (MDLS) on S3',        note: 'One copy of the bytes in open Apache Iceberg. bronze → silver → gold stays in Iceberg.' },
   { layer: 'Catalog',    name: 'AWS Glue + Snowflake Horizon',note: 'CUI tag enforced at the catalog layer. ITAR US-person attestation.' },
-  { layer: 'Transform',  name: 'dbt',                          note: 'Bronze → silver → gold with AS9100-aligned data quality tests.' },
-  { layer: 'Compute',    name: 'Snowflake + Athena',           note: 'Snowflake for the COO portal; Athena for ad-hoc and the data-science team.' },
+  { layer: 'Transform',  name: 'dbt Labs',                     note: 'Triggered by Fivetran Transformations the moment the source sync finishes. Bronze → silver → gold with AS9100-aligned tests.' },
+  { layer: 'Compute',    name: 'Snowflake / Athena / Trino',  note: 'All three read the same Iceberg bytes via external catalogs — no copies, no extracts.' },
   { layer: 'Frontend',   name: 'React 19 + Vite + Tailwind v4', note: 'Static SPA on GitHub Pages, reads JSON snapshot of the gold layer.' },
 ];
 

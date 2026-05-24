@@ -24,30 +24,41 @@ npm run dev    # http://localhost:5173
 
 ## Architecture (illustrative)
 
+Canonical flow: **Source → Fivetran → Iceberg (MDLS) → Snowflake / Athena / Trino → dbt Labs → React**.
+One copy of the bytes. Fivetran lands every CDC row into Iceberg (MDLS) on S3 in open Apache
+Iceberg format. Snowflake, Athena and Trino read the same Iceberg bytes via external catalogs —
+no copies, no extracts. Fivetran Transformations triggers dbt Labs the moment the source sync
+finishes. bronze → silver → gold stays in Iceberg.
+
 ```
    ┌────────────────────────────────────────────────────────────┐
    │  Seven source systems                                       │
    │  SAP S/4HANA · Teamcenter · Apriso MES · Maximo · Costpoint │
    │  SAP Ariba · OEM customer portals (Boeing/Airbus/Lockheed)  │
    └────────────────────────────┬───────────────────────────────┘
-                                │  Fivetran connectors
+                                │  Fivetran connectors (CDC)
                                 │  CUI feeds → AWS GovCloud
                                 │  Commercial feeds → AWS public
                                 ▼
    ┌────────────────────────────────────────────────────────────┐
-   │  Snowflake-managed Iceberg + raw Iceberg on S3              │
+   │  Iceberg (MDLS) on S3 — open Apache Iceberg                 │
    │  Glue + Snowflake Horizon catalogs                          │
    │  data_handling tag enforced at the catalog layer            │
+   │  bronze → silver → gold stays in Iceberg                    │
    └────────────────────────────┬───────────────────────────────┘
-                                │  dbt — bronze → silver → gold
-                                │  AS9100-aligned data quality tests
+                                │  Snowflake / Athena / Trino read
+                                │  the same Iceberg bytes via
+                                │  external catalogs — no copies
                                 ▼
    ┌────────────────────────────────────────────────────────────┐
-   │  Operations gold marts                                      │
-   │    fct_site_production · fct_mro_workpackage                │
-   │    fct_supplier_risk · fct_quality_metric                   │
-   │    dim_program · fct_defense_program_health (CUI)           │
+   │  dbt Labs — bronze → silver → gold                          │
+   │  Triggered by Fivetran Transformations on sync completion   │
+   │  AS9100-aligned data quality tests                          │
    └────────────────────────────┬───────────────────────────────┘
+                                │  gold marts:
+                                │    fct_site_production · fct_mro_workpackage
+                                │    fct_supplier_risk · fct_quality_metric
+                                │    dim_program · fct_defense_program_health (CUI)
                                 ▼
    ┌────────────────────────────────────────────────────────────┐
    │  React + Vite SPA on GitHub Pages                           │

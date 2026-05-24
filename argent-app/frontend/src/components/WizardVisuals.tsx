@@ -50,11 +50,11 @@ type Stage = {
 };
 
 const PIPELINE_STAGES: Stage[] = [
-  { key: 'src',  layer: 'Sources',        vendor: 'SAP S/4HANA + Maximo',  stat: 'MRO + ERP · CDC source',      color: C.inkDim,  icon: 'S' },
-  { key: 'ft',   layer: 'Ingestion',      vendor: 'Fivetran',               stat: '750+ connectors · Iceberg',   color: C.fivetran, icon: 'F' },
-  { key: 'ice',  layer: 'Open Lake',      vendor: 'Iceberg on S3',          stat: 'ACID · open · multi-engine',  color: C.iceberg,  icon: 'I' },
-  { key: 'dbt',  layer: 'Build-time AI',  vendor: 'dbt Labs + dbt-wizard',  stat: '4 sub-agents · 90s/model',   color: C.dbt,      icon: 'W' },
-  { key: 'snow', layer: 'Compute',        vendor: 'Snowflake',              stat: 'External Iceberg · XS WH',   color: C.snow,     icon: 'S' },
+  { key: 'src',  layer: 'Sources',        vendor: 'SAP S/4HANA + Maximo',          stat: 'MRO + ERP · CDC source',                color: C.inkDim,  icon: 'S' },
+  { key: 'ft',   layer: 'Ingestion',      vendor: 'Fivetran',                       stat: '750+ connectors · lands to Iceberg',    color: C.fivetran, icon: 'F' },
+  { key: 'ice',  layer: 'Open Lake',      vendor: 'Iceberg (MDLS)',                 stat: 'One copy · open · multi-engine',        color: C.iceberg,  icon: 'I' },
+  { key: 'dbt',  layer: 'Build-time AI',  vendor: 'dbt Labs + dbt-wizard',          stat: 'Triggered by Fivetran · 4 sub-agents',  color: C.dbt,      icon: 'W' },
+  { key: 'snow', layer: 'Compute',        vendor: 'Snowflake / Athena / Trino',     stat: 'External Iceberg reads · no copies',    color: C.snow,     icon: 'S' },
 ];
 
 export function WizardPipelineFlow() {

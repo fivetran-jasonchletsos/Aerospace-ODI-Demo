@@ -282,8 +282,9 @@ export default function Layout() {
             <div className="eyebrow-light mb-2">Data Pipeline</div>
             <p className="leading-relaxed text-white/70">
               SAP S/4HANA, Siemens Teamcenter, Apriso MES, IBM Maximo, Deltek
-              Costpoint, SAP Ariba and OEM customer portals into Snowflake plus
-              Apache Iceberg via Fivetran.
+              Costpoint, SAP Ariba and OEM customer portals → Fivetran → Iceberg
+              (MDLS) on S3 → Snowflake / Athena / Trino read the same Iceberg
+              bytes → dbt Labs (triggered by Fivetran) → React.
             </p>
           </div>
           <div>

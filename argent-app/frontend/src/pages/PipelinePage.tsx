@@ -30,16 +30,20 @@ export default function PipelinePage() {
     <>
       <PageHeader
         eyebrow="Pipeline · Operations"
-        title="Connectors, dbt layers and lineage"
-        blurb="The plumbing under the operating picture. Fourteen connectors, four dbt layers, AS9100-aligned data quality. CUI feeds run in a parallel pipeline on AWS GovCloud — same shape, separate bytes."
+        title="Source → Iceberg → multi-engine, end-to-end"
+        blurb="The plumbing under the operating picture. Fivetran lands every CDC row into Iceberg (MDLS) on S3. Snowflake, Athena and Trino read the same Iceberg bytes — no copies, no extracts. Fivetran Transformations triggers dbt Labs the moment the source sync finishes. CUI feeds run in a parallel pipeline on AWS GovCloud — same shape, separate bytes."
         callout="REV. C · SHEET 03 OF 08"
       />
 
       {/* Layer cards */}
       <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
         <div className="mb-5">
-          <div className="eyebrow mb-1">dbt Layers</div>
-          <h2 className="font-serif text-2xl font-semibold text-[var(--ink-strong)]">connector → bronze → silver → gold</h2>
+          <div className="eyebrow mb-1">dbt Layers · Triggered by Fivetran</div>
+          <h2 className="font-serif text-2xl font-semibold text-[var(--ink-strong)]">Fivetran → Iceberg (MDLS) → Snowflake / Athena / Trino · bronze → silver → gold</h2>
+          <p className="text-sm text-[var(--ink-muted)] mt-1 max-w-3xl">
+            Fivetran Transformations triggers dbt Labs the moment the source sync finishes.
+            Every layer is materialized as Iceberg — read directly by Snowflake, Athena and Trino.
+          </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
           {layers.map((l) => {

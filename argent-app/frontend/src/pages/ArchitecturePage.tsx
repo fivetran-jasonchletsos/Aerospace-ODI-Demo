@@ -6,7 +6,7 @@ import { AliveMedallion, type SourceNode, type EngineNode } from '../components/
 
 const AERO_SOURCES: SourceNode[] = [
   { id: 'mes',  label: 'Production MES',        sub: 'SQL Server log-CDC',       logo: 'sqlserver', freshness: '46s lag',   status: 'healthy' },
-  { id: 'prog', label: 'Program Mgmt',          sub: 'Oracle LogMiner',          logo: 'oracle',    freshness: '3 min lag', status: 'healthy' },
+  { id: 'prog', label: 'Program Mgmt',          sub: 'Oracle Binary Log Reader',  logo: 'oracle',    freshness: '3 min lag', status: 'healthy' },
   { id: 'tel',  label: 'Flight Test Telemetry', sub: 'Real-time sensor stream',  logo: 'hl7',       freshness: 'live',      status: 'healthy', streaming: true },
   { id: 'faa',  label: 'FAA / DoD Reports',     sub: 'Periodic regulatory',      logo: 'cms',       freshness: '7d lag',    status: 'healthy' },
 ];
@@ -52,8 +52,13 @@ export default function ArchitecturePage() {
         <div className="mb-4">
           <div className="eyebrow mb-1">Data Flow</div>
           <h2 className="font-serif text-2xl font-semibold text-[var(--ink-strong)]">
-            From source systems to one governed gold layer
+            Source → Fivetran → Iceberg (MDLS) → Snowflake / Athena / Trino → dbt Labs → React
           </h2>
+          <p className="text-sm text-[var(--ink-muted)] mt-1 max-w-3xl">
+            One copy of the bytes. Fivetran lands every CDC row into Iceberg (MDLS) on S3 in open
+            Apache Iceberg format. Snowflake, Athena and Trino read the same Iceberg bytes through
+            external catalogs — no copies, no extracts. bronze → silver → gold stays in Iceberg.
+          </p>
         </div>
         <div className="spec-card p-5 sm:p-7">
           <AliveMedallion
@@ -105,11 +110,11 @@ export default function ArchitecturePage() {
           </div>
           <ol className="grid grid-cols-1 md:grid-cols-5 gap-3">
             {[
-              { tag: '01', label: 'Sources', desc: 'SAP, Teamcenter, Apriso, Maximo, Costpoint, Ariba, OEM portals.', chip: 'bronze' as const },
-              { tag: '02', label: 'Ingest',  desc: 'Fivetran lands each into Snowflake + Apache Iceberg. CUI feeds routed to GovCloud.', chip: 'bronze' as const },
-              { tag: '03', label: 'Transform', desc: 'dbt builds silver (conformed) and gold (operations-ready) marts with AS9100-aligned tests.', chip: 'silver' as const },
-              { tag: '04', label: 'Serve',   desc: 'Snowflake serves the COO portal; Athena and DuckDB read the same Iceberg gold layer.', chip: 'gold' as const },
-              { tag: '05', label: 'Reason',  desc: 'Supplier-risk and program-health agents read gold-layer Iceberg through the Glue catalog.', chip: 'gold' as const },
+              { tag: '01', label: 'Sources',  desc: 'SAP, Teamcenter, Apriso, Maximo, Costpoint, Ariba, OEM portals.', chip: 'bronze' as const },
+              { tag: '02', label: 'Fivetran', desc: 'Every CDC row landed into Iceberg (MDLS) on S3. CUI feeds routed to GovCloud.', chip: 'bronze' as const },
+              { tag: '03', label: 'Iceberg (MDLS)', desc: 'One copy of the bytes in open Apache Iceberg. bronze → silver → gold stays in Iceberg.', chip: 'silver' as const },
+              { tag: '04', label: 'Snowflake / Athena / Trino', desc: 'All three engines read the same Iceberg bytes via external catalogs — no copies, no extracts.', chip: 'gold' as const },
+              { tag: '05', label: 'dbt Labs → React', desc: 'Fivetran Transformations triggers dbt the moment the source sync finishes. React reads the gold layer.', chip: 'gold' as const },
             ].map((s) => (
               <li key={s.tag} className="spec-card p-4 hover:border-[var(--orange)] transition-colors">
                 <div className="mono text-[10px] font-bold text-[var(--orange-dim)] tracking-wider">{s.tag}</div>
