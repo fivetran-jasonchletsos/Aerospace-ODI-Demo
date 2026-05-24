@@ -1,7 +1,23 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { api, fmtBytes, fmtNum } from '../api/queries';
 import type { IcebergTable } from '../types';
 import PageHeader from '../components/PageHeader';
+import { AliveMedallion, type SourceNode, type EngineNode } from '../components/AliveMedallion';
+
+const AERO_SOURCES: SourceNode[] = [
+  { id: 'mes',  label: 'Production MES',        sub: 'SQL Server log-CDC',       logo: 'sqlserver', freshness: '46s lag',   status: 'healthy' },
+  { id: 'prog', label: 'Program Mgmt',          sub: 'Oracle LogMiner',          logo: 'oracle',    freshness: '3 min lag', status: 'healthy' },
+  { id: 'tel',  label: 'Flight Test Telemetry', sub: 'Real-time sensor stream',  logo: 'hl7',       freshness: 'live',      status: 'healthy', streaming: true },
+  { id: 'faa',  label: 'FAA / DoD Reports',     sub: 'Periodic regulatory',      logo: 'cms',       freshness: '7d lag',    status: 'healthy' },
+];
+
+const AERO_ENGINES: EngineNode[] = [
+  { name: 'Snowflake', active: true, logo: 'snowflake' },
+  { name: 'Athena',                   logo: 'athena' },
+  { name: 'DuckDB',                   logo: 'duckdb' },
+  { name: 'Trino',                    logo: 'trino' },
+  { name: 'Spark',                    logo: 'spark' },
+];
 
 export default function ArchitecturePage() {
   const [tables, setTables] = useState<IcebergTable[]>([]);
@@ -9,6 +25,18 @@ export default function ArchitecturePage() {
   useEffect(() => { api.getIceberg().then(setTables).catch(() => {}); }, []);
 
   const bySource = ['sap_s4', 'teamcenter', 'apriso', 'maximo', 'costpoint', 'ariba', 'customer_portal'] as const;
+
+  const layerStats = useMemo(() => {
+    const stat = (l: 'bronze' | 'silver' | 'gold') => {
+      const t = tables.filter((x) => x.database === l);
+      return {
+        tables: t.length,
+        rows: t.reduce((s, r) => s + (r.rows ?? 0), 0),
+        bytes: t.reduce((s, r) => s + (r.bytes ?? 0), 0),
+      };
+    };
+    return { bronze: stat('bronze'), silver: stat('silver'), gold: stat('gold') };
+  }, [tables]);
 
   return (
     <>
@@ -18,6 +46,27 @@ export default function ArchitecturePage() {
         blurb="Argent's operating data lives in SAP, Teamcenter, Apriso, Maximo, Costpoint, Ariba and OEM portals. Fivetran lands each into Snowflake + Apache Iceberg. CUI defense-program data is segregated on AWS GovCloud; commercial-OEM data lands in the public account. dbt builds the bronze, silver and gold marts that this site reads."
         callout="REV. C · SHEET 02 OF 08"
       />
+
+      {/* Lakehouse medallion — sources → bronze/silver/gold → engines + roles */}
+      <section className="mx-auto max-w-7xl px-4 pt-10 sm:px-6 lg:px-8">
+        <div className="mb-4">
+          <div className="eyebrow mb-1">Data Flow</div>
+          <h2 className="font-serif text-2xl font-semibold text-[var(--ink-strong)]">
+            From source systems to one governed gold layer
+          </h2>
+        </div>
+        <div className="spec-card p-5 sm:p-7">
+          <AliveMedallion
+            sources={AERO_SOURCES}
+            bronze={{ ...layerStats.bronze, trend: [180, 195, 210, 222, 240, 255, 270] }}
+            silver={{ ...layerStats.silver, trend: [120, 130, 142, 155, 168, 180, 192] }}
+            gold={{   ...layerStats.gold,   trend: [80, 88, 95, 104, 112, 124, 138] }}
+            engines={AERO_ENGINES}
+            accent="#ed8936"
+            enginesCaption="All five read the same data — no copies, no rebuilds per tool."
+          />
+        </div>
+      </section>
 
       {/* Source systems */}
       <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
