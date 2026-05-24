@@ -10,7 +10,9 @@ const NAV_ITEMS: [string, string][] = [
   ['/related', 'Parts Network'],
   ['/architecture', 'ODI Architecture'],
   ['/pipeline', 'Pipeline'],
-  ['/dbt-wizard', 'dbt-wizard'],
+  ['/dbt-wizard', 'Scenario'],
+  ['/wizard-live', 'Live'],
+  ['/wizard-outcome', 'Outcome'],
   ['/policy', 'Policy Brief'],
   ['/about', 'About'],
 ];
