@@ -122,7 +122,7 @@ const STACK = [
   { layer: 'Catalog',    name: 'AWS Glue + Snowflake Horizon',note: 'CUI tag enforced at the catalog layer. ITAR US-person attestation.' },
   { layer: 'Transform',  name: 'dbt Labs',                     note: 'Triggered by Fivetran Transformations the moment the source sync finishes. Bronze → silver → gold with AS9100-aligned tests.' },
   { layer: 'Compute',    name: 'Snowflake / Athena / Trino',  note: 'All three read the same Iceberg bytes via external catalogs — no copies, no extracts.' },
-  { layer: 'Frontend',   name: 'React 19 + Vite + Tailwind v4', note: 'Static SPA on GitHub Pages, reads JSON snapshot of the gold layer.' },
+  { layer: 'Frontend',   name: 'React 19 + Vite + Tailwind v4', note: 'Static SPA on GitHub Pages, reads gold layer via Snowflake / Athena / Trino.' },
 ];
 
 const SOURCES = [
