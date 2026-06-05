@@ -5,8 +5,8 @@ import PageHeader from '../components/PageHeader';
 import { AliveMedallion, type SourceNode, type EngineNode } from '../components/AliveMedallion';
 
 const AERO_SOURCES: SourceNode[] = [
-  { id: 'mes',  label: 'Production MES',        sub: 'SQL Server log-CDC',       logo: 'sqlserver', freshness: '46s lag',   status: 'healthy' },
-  { id: 'prog', label: 'Program Mgmt',          sub: 'Oracle Binary Log Reader',  logo: 'oracle',    freshness: '3 min lag', status: 'healthy' },
+  { id: 'mes',  label: 'Production MES',        sub: 'SQL Server log-CDC',       logo: 'sqlserver', freshness: '46s lag',   status: 'healthy', pipelineUrl: 'https://fivetran.com/dashboard/connectors/shortly_single' },
+  { id: 'prog', label: 'Program Mgmt',          sub: 'Oracle Binary Log Reader',  logo: 'oracle',    freshness: '3 min lag', status: 'healthy', pipelineUrl: 'https://fivetran.com/dashboard/connectors/congratulating_witty' },
   { id: 'tel',  label: 'Flight Test Telemetry', sub: 'Real-time sensor stream',  logo: 'hl7',       freshness: 'live',      status: 'healthy', streaming: true },
   { id: 'faa',  label: 'FAA / DoD Reports',     sub: 'Periodic regulatory',      logo: 'cms',       freshness: '7d lag',    status: 'healthy' },
 ];

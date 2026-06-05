@@ -283,8 +283,8 @@ export default function Layout() {
             <p className="leading-relaxed text-white/70">
               SAP S/4HANA, Siemens Teamcenter, Apriso MES, IBM Maximo, Deltek
               Costpoint, SAP Ariba and OEM customer portals → Fivetran → Iceberg
-              (MDLS) on S3 → dbt → Great Expectations → Snowflake / Athena / Trino
-              → Cortex → React.
+              (MDLS) on S3 → dbt labs + dbt-wizard → Great Expectations → Snowflake
+              / Athena / Trino → run-time agents → React.
             </p>
           </div>
           <div>

@@ -10,7 +10,7 @@
 //   failure_modes  (weight 0.8) — shared failure signatures
 //   supplier_id    (weight 0.4) — same supplier panel
 //
-// Mirrors what a Cortex embedding pipeline would produce in
+// Mirrors what a run-time agent embedding pipeline would produce in
 // production — the math runs locally so the static site ships
 // the part network without a runtime API.
 // ============================================================

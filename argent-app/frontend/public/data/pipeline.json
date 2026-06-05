@@ -35,6 +35,24 @@
   ],
   "connectors": [
     {
+      "source": "Production MES (SQL Server)",
+      "fivetran_id": "shortly_single",
+      "rows_24h": 88400000,
+      "last_sync": "2026-05-24T06:00:00Z",
+      "status": "ok",
+      "destination": "snowflake",
+      "data_handling": "unclassified"
+    },
+    {
+      "source": "Program Management (Oracle)",
+      "fivetran_id": "congratulating_witty",
+      "rows_24h": 88400000,
+      "last_sync": "2026-05-24T06:00:00Z",
+      "status": "ok",
+      "destination": "snowflake",
+      "data_handling": "unclassified"
+    },
+    {
       "source": "SAP S/4HANA (ERP)",
       "fivetran_id": "wronged_restrain",
       "rows_24h": 88400000,
